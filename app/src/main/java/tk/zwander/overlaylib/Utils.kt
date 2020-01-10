@@ -3,7 +3,6 @@ package tk.zwander.overlaylib
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.AssetManager
-import com.topjohnwu.superuser.BuildConfig
 import com.topjohnwu.superuser.Shell
 import java.io.*
 import javax.crypto.Cipher
