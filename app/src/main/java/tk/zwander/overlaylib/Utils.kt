@@ -65,6 +65,7 @@ fun getManifest(base: File, suffix: String, targetPackage: String, overlayPkg: S
         "<manifest " +
                 "xmlns:android=\"http://schemas.android.com/apk/res/android\" " +
                 "package=\"$overlayPkg\" " +
+                "android:targetSdkVersion=\"29\" " +
                 "android:versionCode=\"100\" " +
                 "android:versionName=\"100\"> "
     )
