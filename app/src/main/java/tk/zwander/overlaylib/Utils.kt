@@ -3,7 +3,7 @@ package tk.zwander.overlaylib
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.AssetManager
-import androidx.core.content.pm.PackageInfoCompat
+import com.topjohnwu.superuser.BuildConfig
 import com.topjohnwu.superuser.Shell
 import java.io.*
 import javax.crypto.Cipher
@@ -58,7 +58,11 @@ fun Context.makeBaseDir(suffix: String): File {
     return dir
 }
 
-fun getManifest(base: File, suffix: String, targetPackage: String, overlayPkg: String = "tk.zwander.overlaylib.$targetPackage"): File {
+fun getManifest(
+    base: File,
+    targetPackage: String,
+    overlayPkg: String = constructOverlayPackage(targetPackage)
+): File {
     val builder = StringBuilder()
     builder.append("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>")
     builder.append(
@@ -193,3 +197,5 @@ fun makeResDir(base: File): File {
 
     return dir
 }
+
+fun constructOverlayPackage(targetPackage: String) = "${BuildConfig.LIBRARY_PACKAGE_NAME}.$targetPackage"

@@ -102,7 +102,7 @@ fun Context.doCompileAlignAndSign(
     resFiles: List<ResourceFileData>
 ) {
     val base = makeBaseDir(suffix)
-    val manifest = getManifest(base, suffix, targetPackage)
+    val manifest = getManifest(base, targetPackage)
     val unsignedUnaligned = makeOverlayFile(base, suffix, OverlayType.UNSIGNED_UNALIGNED)
     val unsigned = makeOverlayFile(base, suffix, OverlayType.UNSIGNED)
     val signed = makeOverlayFile(base, suffix, OverlayType.SIGNED)
