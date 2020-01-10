@@ -44,7 +44,7 @@ val Context.zipalign: String?
 
 @SuppressLint("SetWorldWritable", "SetWorldReadable")
 fun Context.makeBaseDir(suffix: String): File {
-    val dir = File(cacheDir, suffix)
+    val dir = File(externalCacheDir, suffix)
 
     if (dir.exists()) dir.deleteRecursively()
 
