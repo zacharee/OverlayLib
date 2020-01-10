@@ -68,7 +68,7 @@ fun getManifest(base: File, suffix: String, targetPackage: String, overlayPkg: S
                 "android:versionCode=\"100\" " +
                 "android:versionName=\"100\"> "
     )
-    builder.append("<uses-sdk android:minSdkVersion=\"26\" android:targetSdkVersion=\"29\" />")
+    builder.append("<uses-sdk android:minSdkVersion=\"28\" android:targetSdkVersion=\"29\" />")
     builder.append("<uses-permission android:name=\"com.samsung.android.permission.SAMSUNG_OVERLAY_COMPONENT\" />")
     builder.append("<overlay android:targetName=\"$targetPackage\" android:targetPackage=\"$targetPackage\" />")
     builder.append("</manifest>")
