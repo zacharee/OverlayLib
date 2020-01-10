@@ -70,7 +70,7 @@ fun getManifest(base: File, suffix: String, targetPackage: String, overlayPkg: S
     )
     builder.append("<uses-sdk android:minSdkVersion=\"26\" android:targetSdkVersion=\"29\" />")
     builder.append("<uses-permission android:name=\"com.samsung.android.permission.SAMSUNG_OVERLAY_COMPONENT\" />")
-    builder.append("<overlay android:targetName=\"testing\" android:targetPackage=\"$targetPackage\" />")
+    builder.append("<overlay android:targetName=\"$targetPackage\" android:targetPackage=\"$targetPackage\" />")
     builder.append("</manifest>")
 
     val manifestFile = File(base, "AndroidManifest.xml")
