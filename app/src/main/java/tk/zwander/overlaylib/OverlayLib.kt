@@ -134,8 +134,5 @@ fun Context.doCompileAlignAndSign(
     alignOverlay(unsignedUnaligned, unsigned)
     signOverlay(unsigned, signed)
 
-    Shell.sh("cp ${signed.absolutePath} ${signed.absolutePath}").submit {
-        handleShellResult(it, true)
-        listener?.invoke(signed)
-    }
+    listener?.invoke(signed)
 }
