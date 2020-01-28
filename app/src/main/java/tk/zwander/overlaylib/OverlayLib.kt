@@ -39,7 +39,7 @@ fun Context.compileOverlay(manifest: File, overlayFile: File, resFile: File, tar
         .append(overlayFile)
         .toString()
 
-    Shell.sh(aaptCmd).exec()
+    loggedSh(aaptCmd, shouldThrow = true)
 
     overlayFile.setExecutable(true, false)
     overlayFile.setReadable(true, false)
@@ -57,13 +57,12 @@ fun Context.alignOverlay(overlayFile: File, alignedOverlayFile: File) {
         .append(alignedOverlayFile.absolutePath)
         .toString()
 
-    Shell.sh(zipalignCmd).exec()
-
-    Shell.sh("chmod 777 ${alignedOverlayFile.absolutePath}").exec()
+    loggedSh(zipalignCmd, shouldThrow = true)
+    loggedSh("chmod 777 ${alignedOverlayFile.absolutePath}")
 }
 
 fun Context.signOverlay(overlayFile: File, signed: File) {
-    Shell.sh("chmod 777 ${overlayFile.absolutePath}").exec()
+    loggedSh("chmod 777 ${overlayFile.absolutePath}")
 
     val key = File(cacheDir, "/signing-key-new")
     val pass = "overlay".toCharArray()
@@ -92,7 +91,7 @@ fun Context.signOverlay(overlayFile: File, signed: File) {
         .build()
         .sign()
 
-    Shell.sh("chmod 777 ${signed.absolutePath}").exec()
+    loggedSh("chmod 777 ${signed.absolutePath}")
 }
 
 fun Context.doCompileAlignAndSign(
@@ -136,6 +135,7 @@ fun Context.doCompileAlignAndSign(
     signOverlay(unsigned, signed)
 
     Shell.sh("cp ${signed.absolutePath} ${signed.absolutePath}").submit {
+        handleShellResult(it, true)
         listener?.invoke(signed)
     }
 }

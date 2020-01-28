@@ -3,6 +3,7 @@ package tk.zwander.overlaylib
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.AssetManager
+import android.util.Log
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
@@ -10,6 +11,13 @@ import com.topjohnwu.superuser.io.SuFileOutputStream
 import java.io.*
 import javax.crypto.Cipher
 import javax.crypto.CipherInputStream
+
+class OverlayException : Exception {
+    constructor() : super()
+    constructor(msg: String) : super(msg)
+    constructor(msg: String, t: Throwable) : super(msg, t)
+    constructor(t: Throwable) : super(t)
+}
 
 fun initShell() {
     Shell.Config.setFlags(Shell.FLAG_REDIRECT_STDERR)
@@ -244,3 +252,22 @@ fun SuFile.copyTo(target: SuFile, overwrite: Boolean = false, bufferSize: Int = 
 
 fun SuFile.inputStream(): SuFileInputStream = SuFileInputStream(this)
 fun SuFile.outputStream(): SuFileOutputStream = SuFileOutputStream(this)
+
+fun loggedSh(vararg commands: String, shouldThrow: Boolean = false) {
+    Shell.sh(*commands).exec().apply {
+        handleShellResult(this, shouldThrow)
+    }
+}
+
+fun handleShellResult(result: Shell.Result, shouldThrow: Boolean = false) {
+    if (!result.isSuccess) {
+        val constructMsg = "Failed to exec:\n${result.out.joinToString("\n")}\n${result.err.joinToString("\n")}"
+        val e = OverlayException(constructMsg)
+
+        if (shouldThrow) {
+            throw e
+        } else {
+            Log.e("OverlayLib", "Error", e)
+        }
+    }
+}
