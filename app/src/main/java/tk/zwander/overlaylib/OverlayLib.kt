@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import com.android.apksig.ApkSigner
 import com.topjohnwu.superuser.Shell
 import java.io.File
@@ -134,5 +136,7 @@ fun Context.doCompileAlignAndSign(
     alignOverlay(unsignedUnaligned, unsigned)
     signOverlay(unsigned, signed)
 
-    listener?.invoke(signed)
+    Handler(Looper.getMainLooper()).post {
+        listener?.invoke(signed)
+    }
 }
