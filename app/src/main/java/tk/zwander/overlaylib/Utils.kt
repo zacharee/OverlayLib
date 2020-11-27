@@ -28,13 +28,13 @@ fun initShell() {
 
 val Context.aapt: String
     get() {
-        BuildTools.setup(this, Build.SUPPORTED_64_BIT_ABIS.isEmpty(), Build.SUPPORTED_64_BIT_ABIS.isNotEmpty())
+        BuildTools.setup(this)
         return BuildTools.getAapt(this).absolutePath
     }
 
 val Context.zipalign: String
     get() {
-        BuildTools.setup(this, Build.SUPPORTED_64_BIT_ABIS.isEmpty(), Build.SUPPORTED_64_BIT_ABIS.isNotEmpty())
+        BuildTools.setup(this)
         return BuildTools.getZipalign(this).absolutePath
     }
 
