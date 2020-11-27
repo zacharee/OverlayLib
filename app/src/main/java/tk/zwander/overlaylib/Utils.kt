@@ -3,6 +3,7 @@ package tk.zwander.overlaylib
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.AssetManager
+import android.os.Build
 import android.util.Log
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
@@ -27,11 +28,13 @@ fun initShell() {
 
 val Context.aapt: String
     get() {
+        BuildTools.setup(this, Build.SUPPORTED_64_BIT_ABIS.isEmpty(), Build.SUPPORTED_64_BIT_ABIS.isNotEmpty())
         return BuildTools.getAapt(this).absolutePath
     }
 
 val Context.zipalign: String
     get() {
+        BuildTools.setup(this, Build.SUPPORTED_64_BIT_ABIS.isEmpty(), Build.SUPPORTED_64_BIT_ABIS.isNotEmpty())
         return BuildTools.getZipalign(this).absolutePath
     }
 
