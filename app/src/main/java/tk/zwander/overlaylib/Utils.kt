@@ -26,7 +26,7 @@ fun initShell() {
 
 val Context.aapt: String?
     get() {
-        val aapt = File(cacheDir, "aapt")
+        val aapt = File(externalCacheDir, "aapt")
 
         if (!aapt.exists() && !assets.extractAsset("aapt", aapt.absolutePath))
             return null
@@ -40,7 +40,7 @@ val Context.aapt: String?
 
 val Context.zipalign: String?
     get() {
-        val zipalign = File(cacheDir, "zipalign")
+        val zipalign = File(externalCacheDir, "zipalign")
 
         if (!zipalign.exists() && !assets.extractAsset("zipalign", zipalign.absolutePath))
             return null
