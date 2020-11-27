@@ -25,7 +25,7 @@ fun initShell() {
 }
 
 private val Context.libsDir: File
-    get() = File(applicationInfo.nativeLibraryRootDir)
+    get() = File(applicationInfo.nativeLibraryDir).parentFile!!
 
 val Context.aapt: String?
     get() {
