@@ -3,6 +3,7 @@ package tk.zwander.overlaylib
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.AssetManager
+import android.os.Environment
 import android.util.Log
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
@@ -26,7 +27,7 @@ fun initShell() {
 
 val Context.aapt: String?
     get() {
-        val aapt = File(externalCacheDir, "aapt")
+        val aapt = File(codeCacheDir, "aapt")
 
         if (!aapt.exists() && !assets.extractAsset("aapt", aapt.absolutePath))
             return null
@@ -40,7 +41,7 @@ val Context.aapt: String?
 
 val Context.zipalign: String?
     get() {
-        val zipalign = File(externalCacheDir, "zipalign")
+        val zipalign = File(codeCacheDir, "zipalign")
 
         if (!zipalign.exists() && !assets.extractAsset("zipalign", zipalign.absolutePath))
             return null
@@ -54,7 +55,7 @@ val Context.zipalign: String?
 
 @SuppressLint("SetWorldWritable", "SetWorldReadable")
 fun Context.makeBaseDir(suffix: String): File {
-    val dir = File(externalCacheDir, suffix)
+    val dir = File(codeCacheDir, suffix)
 
     if (dir.exists()) dir.deleteRecursively()
 

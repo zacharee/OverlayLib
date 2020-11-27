@@ -66,7 +66,7 @@ fun Context.alignOverlay(overlayFile: File, alignedOverlayFile: File) {
 fun Context.signOverlay(overlayFile: File, signed: File) {
     loggedSh("chmod 777 ${overlayFile.absolutePath}")
 
-    val key = File(externalCacheDir, "/signing-key-new")
+    val key = File(codeCacheDir, "/signing-key-new")
     val pass = "overlay".toCharArray()
 
     if (key.exists()) key.delete()
