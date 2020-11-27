@@ -3,7 +3,6 @@ package tk.zwander.overlaylib
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.AssetManager
-import android.os.Environment
 import android.util.Log
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
@@ -25,37 +24,40 @@ fun initShell() {
     Shell.Config.setTimeout(10)
 }
 
+private val Context.libsDir: File
+    get() = getDir("libs", 0)
+
 val Context.aapt: String?
     get() {
-        val aapt = File(codeCacheDir, "aapt")
+        val aapt = File(libsDir, "aapt")
 
-        if (!aapt.exists() && !assets.extractAsset("aapt", aapt.absolutePath))
+        if (!aapt.exists())
             return null
 
-        aapt.setExecutable(true)
-        aapt.setWritable(true)
-        aapt.setReadable(true)
+//        aapt.setExecutable(true)
+//        aapt.setWritable(true)
+//        aapt.setReadable(true)
 
         return aapt.absolutePath
     }
 
 val Context.zipalign: String?
     get() {
-        val zipalign = File(codeCacheDir, "zipalign")
+        val zipalign = File(libsDir, "zipalign")
 
-        if (!zipalign.exists() && !assets.extractAsset("zipalign", zipalign.absolutePath))
+        if (!zipalign.exists())
             return null
 
-        zipalign.setExecutable(true)
-        zipalign.setWritable(true)
-        zipalign.setReadable(true)
+//        zipalign.setExecutable(true)
+//        zipalign.setWritable(true)
+//        zipalign.setReadable(true)
 
         return zipalign.absolutePath
     }
 
 @SuppressLint("SetWorldWritable", "SetWorldReadable")
 fun Context.makeBaseDir(suffix: String): File {
-    val dir = File(codeCacheDir, suffix)
+    val dir = File(cacheDir, suffix)
 
     if (dir.exists()) dir.deleteRecursively()
 
