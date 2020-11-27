@@ -8,6 +8,7 @@ import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import com.topjohnwu.superuser.io.SuFileOutputStream
+import projekt.commons.buildtools.BuildTools
 import java.io.*
 import javax.crypto.Cipher
 import javax.crypto.CipherInputStream
@@ -24,35 +25,14 @@ fun initShell() {
     Shell.Config.setTimeout(10)
 }
 
-private val Context.libsDir: File
-    get() = File(applicationInfo.nativeLibraryDir).parentFile!!
-
-val Context.aapt: String?
+val Context.aapt: String
     get() {
-        val aapt = File(libsDir, "aapt")
-
-        if (!aapt.exists())
-            return null
-
-//        aapt.setExecutable(true)
-//        aapt.setWritable(true)
-//        aapt.setReadable(true)
-
-        return aapt.absolutePath
+        return BuildTools.getAapt(this).absolutePath
     }
 
-val Context.zipalign: String?
+val Context.zipalign: String
     get() {
-        val zipalign = File(libsDir, "zipalign")
-
-        if (!zipalign.exists())
-            return null
-
-//        zipalign.setExecutable(true)
-//        zipalign.setWritable(true)
-//        zipalign.setReadable(true)
-
-        return zipalign.absolutePath
+        return BuildTools.getZipalign(this).absolutePath
     }
 
 @SuppressLint("SetWorldWritable", "SetWorldReadable")
