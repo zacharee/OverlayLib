@@ -21,11 +21,6 @@ class OverlayException : Exception {
     constructor(t: Throwable) : super(t)
 }
 
-fun initShell() {
-    Shell.Config.setFlags(Shell.FLAG_REDIRECT_STDERR)
-    Shell.Config.setTimeout(10)
-}
-
 val Context.aapt: String
     get() {
         BuildTools.setup(this)
@@ -121,7 +116,7 @@ private fun handleExtractAsset(
     var path = devicePath
     var `in`: InputStream? = null
     var out: OutputStream? = null
-    val parent = File(path).parentFile
+    val parent = File(path).parentFile!!
     if (!parent.exists() && !parent.mkdirs()) {
         throw RuntimeException("cannot create directory: " + parent.absolutePath)
     }
