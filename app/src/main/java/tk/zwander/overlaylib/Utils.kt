@@ -171,6 +171,10 @@ fun makeEmptyAnimationList(): String {
         .toString()
 }
 
+fun makeResourceXml(data: Collection<ResourceData>): String {
+    return makeResourceXml(*data.toTypedArray())
+}
+
 fun makeResourceXml(vararg data: ResourceData): String {
     return StringBuilder()
         .append("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
