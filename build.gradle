@@ -1,11 +1,12 @@
 buildscript {
-    ext.kotlin_version = "1.4.21"
+    ext.kotlin_version = "1.4.31"
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven { url "https://dl.bintray.com/android/android-tools" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha05'
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha12'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -13,8 +14,9 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven { url "https://dl.bintray.com/android/android-tools" }
     }
 }
 
