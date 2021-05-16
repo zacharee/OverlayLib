@@ -27,6 +27,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "com.github.topjohnwu.libsu:core:3.0.2"
     implementation "com.github.topjohnwu.libsu:io:3.0.2"
-    implementation 'com.android.tools.build:apksig:3.2.1'
+    implementation 'com.android.tools.build:apksig:4.2.1'
     implementation 'com.github.prjkt-io.android-commons:buildtools:dev-SNAPSHOT'
 }
