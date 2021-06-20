@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 29
@@ -27,4 +28,16 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:io:3.0.2"
     implementation 'com.android.tools.build:apksig:4.2.1'
     implementation 'com.github.prjkt-io.android-commons:buildtools:dev-SNAPSHOT'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+            }
+        }
+    }
 }
